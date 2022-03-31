@@ -1,6 +1,6 @@
 import random
 
-class Attack:
+class Normal:
     def __init__(self, at, xp = 1):
         self.at = at
         self.xp = xp
@@ -15,10 +15,15 @@ class Attack:
             r = random.randint(30,70)
             return(int(r * self.xp))
 
+        if self.at == "cut":
+            r = random.randint(45, 55)
+            return(int(r * self.xp))
+
 #Normal moves: wip, punch
 
-class AirType(Attack):
-    def __init__(self, at=0, xp=1):
+
+class AirType(Normal):
+    def __init__(self, at, xp = 1):
         super().__init__(at, xp)
 
     def do(self):
@@ -29,8 +34,8 @@ class AirType(Attack):
 
 #Air moves: fly
 
-class FireType(Attack):
-    def __init__(self, at=0, xp=1):
+class FireType(Normal):
+    def __init__(self, at, xp = 1):
         super().__init__(at, xp)
 
     def do(self):
