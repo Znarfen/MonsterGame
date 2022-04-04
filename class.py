@@ -8,15 +8,15 @@ class Normal:
     def do(self):
 
         if self.at == "wipp":
-            r = random.randint(30,70)
+            r = random.randint(10, 30)
             return(int(r * self.xp))
 
         if self.at == "punch":
-            r = random.randint(30,70)
+            r = random.randint(5, 15)
             return(int(r * self.xp))
 
         if self.at == "cut":
-            r = random.randint(45, 55)
+            r = random.randint(1, 10)
             return(int(r * self.xp))
 
     def allmoves(self):
@@ -30,14 +30,30 @@ class AirType(Normal):
         super().__init__(at, xp)
 
     def do(self):
+
         if self.at == "fly":
-            r = random.randint(40,60)
+            r = random.randint(20, 25)
             return(int(r * self.xp))
         return super().do()
 
     def allmoves(self):
         move = ["fly"] + super().allmoves()
         return(move)
+
+class GhostType(AirType):
+    def __init__(self, at="", xp=1):
+        super().__init__(at, xp)
+
+    def do(self):
+
+        if self.at == "Hanted":
+            r = random.randint(20, 25)
+            return(int(r * self.xp))
+        return super().do()
+
+    def allmoves(self):
+        move = ["fly"] + super().allmoves()
+        return(move)  #inte kalr
 
 #Air moves: fly
 
@@ -46,8 +62,9 @@ class FireType(Normal):
         super().__init__(at, xp)
 
     def do(self):
+
         if self.at == "burn":
-            r = random.randint(20,80)
+            r = random.randint(15, 30)
             return(int(r * self.xp))
         return super().do()
 
@@ -56,6 +73,24 @@ class FireType(Normal):
         return(move)
 
 #Fire moves: burn
+
+class WaterType(Normal):
+    def __init__(self, at="", xp=1):
+        super().__init__(at, xp)
+
+    def do(self):
+
+        if self.at == "splach":
+            r = random.randint(10, 35)
+            return(int(r * self.xp))
+        return super().do()
+
+    def allmoves(self):
+        move = ["splach"] + super().allmoves()
+        return(move)
+    
+
+
 
 
 
