@@ -40,22 +40,24 @@ class AirType(Normal):
         move = ["fly"] + super().allmoves()
         return(move)
 
+#Air moves: fly
+
 class GhostType(AirType):
     def __init__(self, at="", xp=1):
         super().__init__(at, xp)
 
     def do(self):
 
-        if self.at == "Hanted":
-            r = random.randint(20, 25)
+        if self.at == "Death Ray":
+            r = random.randint(25, 30)
             return(int(r * self.xp))
         return super().do()
 
     def allmoves(self):
-        move = ["fly"] + super().allmoves()
-        return(move)  #inte kalr
+        move = ["Death Ray"] + super().allmoves()
+        return(move)
 
-#Air moves: fly
+# Ghost moves: Death Ray
 
 class FireType(Normal):
     def __init__(self, at = "", xp = 1):
@@ -89,6 +91,20 @@ class WaterType(Normal):
         move = ["splach"] + super().allmoves()
         return(move)
     
+class ElementalType(WaterType, FireType):
+    def __init__(self, at="", xp=1):
+        super().__init__(at, xp)
+
+    def do(self):
+
+        if self.at == "Obsidian Throw":
+            r = random.randint(10, 35)
+            return(int(r * self.xp))
+        return super().do()
+
+    def allmoves(self):
+        move = ["Obsidian Throw"] + super().allmoves()
+        return(move)
 
 
 

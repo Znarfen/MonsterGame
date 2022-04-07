@@ -1,0 +1,4 @@
+import monstertypes
+
+
+class Monsters()
