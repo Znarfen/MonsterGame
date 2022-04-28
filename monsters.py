@@ -1,4 +1,5 @@
-
+import requests
+import random
 
 class NoType():
     def __init__(self, at = 0, health = 0, monstername = "", monstertype = ""):
@@ -40,27 +41,31 @@ class Battle():
 
     def attack(self):
         if self.mon1.type() == self.mon2.type():
-            return(self.mon1.attack())
+            ret = (self.mon1.attack())
 
         if self.mon1.type() == "Fire":
             if self.mon2.type() == "Grass":
-                return(self.mon1.attack() + 2)
+                ret = (self.mon1.attack() + 2)
             if self.mon2.type() == "Water":
                 return(self.mon1.attack() - 2)
 
         if self.mon1.type() == "Water":
             if self.mon2.type() == "Grass":
-                return(self.mon1.attack() - 2)
+                ret = (self.mon1.attack() - 2)
             if self.mon2.type() == "Fire":
-                return(self.mon1.attack() + 2)
+                ret = (self.mon1.attack() + 2)
 
         if self.mon1.type() == "Grass":
             if self.mon2.type() == "Water":
-                return(self.mon1.attack() + 2)
+                ret = (self.mon1.attack() + 2)
             if self.mon2.type() == "Fire":
-                return(self.mon1.attack() - 2)
+                ret = (self.mon1.attack() - 2)
 
-class uppgrade():
+        if ret > 0:
+            ret = 0
+        return(ret)
+
+class Upgrade():
     def __init__(self, mon):
         self.mon = mon
 
@@ -80,14 +85,26 @@ class uppgrade():
 
         return(NoType(at, health, name, type))
 
-FlygFan = Fire(3, 1, "FlygFan")
+class Generator():
+    def new():
+        try:
+            word1 = requests.get("https://random-word-api.herokuapp.com/word")
+            word2 = requests.get("https://random-word-api.herokuapp.com/word")
+            return(word1.json()[0] + "-" + word2.json()[0])
 
-Äggis = Grass(1, 4, "Äggis")
+        except:
+            name = ["Ägg", "Jon", "Matt", "Nick, Fregroj", "Nick", "Zac", 
+            "No", "Red", "Blue", "Yelow", "Grean", "Demo", "Null", "Gass", 
+            "One", "PeePee", "UwU", "No", "Mon", "OwO", "Lul", "Fast"]
+            
+            name1 = random.choice(name)
+            name2 = random.choice(name)
+            return(name1 + "-" + name2)
 
-SlemHög = Water(2, 2, "SlemHög")
+print(Generator.new())
 
-Makaias = Water(1, 5, "Makaias")
 
-print(Battle(Makaias, Äggis).attack())
+
+
 
 
