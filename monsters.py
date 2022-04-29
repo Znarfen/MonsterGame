@@ -87,19 +87,23 @@ class Upgrade():
 
 class Generator():
     def new():
-        try:
-            word1 = requests.get("https://random-word-api.herokuapp.com/word")
-            word2 = requests.get("https://random-word-api.herokuapp.com/word")
-            return(word1.json()[0] + "-" + word2.json()[0])
+        names = []
+        name = ["Ägg", "Jon", "Matt", "Nick, Fregroj", "Nick", "Zac", 
+        "No", "Red", "Blue", "Yelow", "Grean", "Demo", "Null", "Gass", 
+        "One", "PeePee", "UwU", "No", "Mon", "OwO", "Lul", "Fast"]
 
-        except:
-            name = ["Ägg", "Jon", "Matt", "Nick, Fregroj", "Nick", "Zac", 
-            "No", "Red", "Blue", "Yelow", "Grean", "Demo", "Null", "Gass", 
-            "One", "PeePee", "UwU", "No", "Mon", "OwO", "Lul", "Fast"]
+        try:
+            name1 = requests.get("https://random-word-api.herokuapp.com/word").json()[0]
+            name2 = random.choice(name)
+            names.append(name1 + "-" + name2)
+            names.append(name2 + "-" + name1)
             
+        except:
+
             name1 = random.choice(name)
             name2 = random.choice(name)
-            return(name1 + "-" + name2)
+
+        return(random.choices(names)[0])
 
 print(Generator.new())
 
