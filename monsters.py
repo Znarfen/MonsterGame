@@ -95,15 +95,18 @@ class Generator():
         try:
             name1 = requests.get("https://random-word-api.herokuapp.com/word").json()[0]
             name2 = random.choice(name)
-            names.append(name1 + "-" + name2)
-            names.append(name2 + "-" + name1)
             
         except:
 
             name1 = random.choice(name)
             name2 = random.choice(name)
 
-        return(random.choices(names)[0])
+        names.append(name1 + "-" + name2)
+        names.append(name2 + "-" + name1)
+
+        return(random.choices(names)[0].upper())
+
+        
 
 print(Generator.new())
 
