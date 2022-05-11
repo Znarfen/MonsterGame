@@ -61,7 +61,7 @@ class Battle():
             if self.mon2.type() == "Fire":
                 ret = (self.mon1.power() - 2)
 
-        if ret > 0:
+        if ret < 0:
             ret = 0
         return(ret)
 

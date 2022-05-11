@@ -3,12 +3,11 @@ import random
 
 level = 0
 
-mon1 = monsters.Generator(4, "Fire").new()
-mon2 = monsters.Generator(4, "Water").new()
-mon3 = monsters.Generator(4, "Grass").new()
+mon1 = monsters.Generator(2, "Fire").new()
+mon2 = monsters.Generator(2, "Water").new()
+mon3 = monsters.Generator(2, "Grass").new()
 
 def about(mon):
-    print()
     n1 = ("name = " + mon.name())
     n2 = ("power = " + str(mon.power()))
     n3 = ("hp = " + str(mon.hp()))
@@ -16,114 +15,146 @@ def about(mon):
     print(n1, "/", n2, "/", n3, "/", n4)
     print()
 
-
-while True:
-    deck = [mon1, mon2, mon3]
-
-    level += 1
-    print("----------------")
+def main():
     print()
-    ii = 1
+    print("1. PLAY")
+    print("2. HOW TO PLAY")
+    print("3. SETINGS")
+    print("4. HIGH SCORE")
 
-    print("This is the deck you have:")
-    for i in deck:
-        print("Monster-" + str(ii) + ":")
-        about(i)
-        ii += 1
-    print("")
 
-    opponent = monsters.Generator(level).new()
-    print("About your opponent:")
-    about(opponent)
 
+def game():
     while True:
-        try:
-            choice = int(input("Witch monster do you want to use? :"))
+        deck = [mon1, mon2, mon3]
+
+        level += 1
+        print("----------------")
+        print()
+        ii = 1
+
+        print("This is the deck you have:")
+        for i in deck:
+            print("Monster-" + str(ii) + ":")
+            about(i)
+            ii += 1
+        print("")
+
+        opponent = monsters.Generator(level).new()
+        print("About your opponent:")
+        about(opponent)
+
+        while True:
+            try:
+                choice = int(input("Witch monster do you want to use? :"))
+                print()
+                pmon = deck[choice-1]
+                break
+            except:
+                print("Wrong Input\n")
+
+        ph = pmon.hp()
+        pa = monsters.Battle(pmon, opponent).attack()
+        
+        oh = opponent.hp()
+        oa = monsters.Battle(opponent, pmon).attack()
+        
+        h = 0
+        while True:
+            h += 1
+            print("Round " + str(h))
             print()
-            pmon = deck[choice-1]
-            break
-        except:
-            print("Wrong Input\n")
 
-    ph = pmon.hp()
-    pa = monsters.Battle(pmon, opponent).attack()
-    
-    oh = opponent.hp()
-    oa = monsters.Battle(opponent, pmon).attack()
-    
-    h = 0
-    while True:
-        h += 1
-        print("Round " + str(h))
-        print()
-        ph = ph - oa
-        oh = oh - pa
-
-        print("Player attak:", pa, "/ Player hp:", ph)
-        print("Opponernt attak:", oa, "/ Opponent hp:", oh)
-        print()
-
-        if ph < 0:
-            win = False
-            print(pmon.name(), "faild")
-            break
-
-        if oh < 0:
-            win = True
-            print(opponent.name(), "faild")
-            break
+            r = random.randint(1, 20)
+            if r == 1:
+                print("Player: SUPER-DUPER-DUPER ATTACK")
+                pa = pa + 4
             
-        if oh < 0:
+            r = random.randint(1, 20)
+            if r == 1:
+                print("Opponent: SUPER-DUPER-DUPER ATTACK")
+                oa = oa + 4
+
+            ph = ph - oa
+            oh = oh - pa
+
+            print("Player attak:", pa, "/ Player hp:", ph)
+            print("Opponernt attak:", oa, "/ Opponent hp:", oh)
+            print()
+
             if ph < 0:
-                
-                if ph < oh:
-                    win = True
-                if oh < ph:
-                    win = False
+                win = False
+                print(pmon.name(), "faild")
                 break
 
+            if oh < 0:
+                win = True
+                print(opponent.name(), "faild")
+                break
+                
+            if oh < 0:
+                if ph < 0:
+                    
+                    if ph < oh:
+                        win = False
+                    if oh < ph:
+                        win = True
+                    break
+
+            print()
+            input("Press ENTER ")
+            print("------------")
+            print()
+
+        print("Score:", level)
+        if win == True:
+            print("You won!")
+
+        if win == False:
+            print("The opponent won!")
+            break
         print()
         input("Press ENTER ")
-        print("------------")
+        ii = 1
+        
+        print("This is the deck you have:")
+        for i in deck:
+            print("Monster-" + str(ii) + ":")
+            about(i)
+            ii += 1
+        print("")
+
+        while True:
+            try:
+                choice1 = int(input("Witch monster do you want to upgrade? :"))
+                print()
+                pmon = deck[choice1-1]
+                r = random.randint(0,1)
+
+                if r == 0:
+                    if choice1 == 1:
+                        mon1 = monsters.Upgrade(mon1).at()
+
+                    if choice1 == 2:
+                        mon2 = monsters.Upgrade(mon2).at()
+
+                    if choice1 == 3:
+                        mon3 = monsters.Upgrade(mon3).at()
+                
+                if r == 1:
+                    if choice1 == 1:
+                        mon1 = monsters.Upgrade(mon1).hp()
+
+                    if choice1 == 2:
+                        mon2 = monsters.Upgrade(mon2).hp()
+
+                    if choice1 == 3:
+                        mon3 = monsters.Upgrade(mon3).hp()
+
+                break
+            except:
+                print("Wrong Input\n")
         print()
-
-    print("Score:", level)
-    if win == True:
-        print("You won!")
-
-    if win == False:
-        print("The opponent won!")
-        break
-    print()
-    input("Press ENTER ")
-    ii = 1
-    
-    print("This is the deck you have:")
-    for i in deck:
-        print("Monster-" + str(ii) + ":")
-        about(i)
-        ii += 1
-    print("")
-
-    while True:
-        try:
-            choice1 = int(input("Witch monster do you want to upgrade? :"))
-            print()
-            pmon = deck[choice1-1]
-
-            if choice1 == 1:
-                mon1 = monsters.Upgrade(mon1).at()
-
-            if choice1 == 2:
-                mon2 = monsters.Upgrade(mon2).at()
-
-            if choice1 == 3:
-                mon3 = monsters.Upgrade(mon3).at()
-
-            break
-        except:
-            print("Wrong Input\n")
-    print()
 
 
     
