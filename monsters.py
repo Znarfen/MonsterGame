@@ -86,8 +86,9 @@ class Upgrade():
         return(NoType(at, health, name, type))
 
 class Generator():
-    def __init__(self, level = 1):
+    def __init__(self, level = 1, type = ""):
         self.level = level
+        self.type = type
 
     def new(self):
         names = []
@@ -113,7 +114,10 @@ class Generator():
         hp = g - num
         name = (random.choices(names)[0].upper())
 
-        r = random.choice(["Fire", "Water", "Grass"])
+        if self.type == "":
+            r = random.choice(["Fire", "Water", "Grass"])
+        else:
+            r = self.type
 
         if r == "Fire":
             return(Fire(at, hp, name))
