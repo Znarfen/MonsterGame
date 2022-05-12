@@ -1,57 +1,52 @@
 import monsters
 import random
+import time
 
-level = 0
-
-mon1 = monsters.Generator(2, "Fire").new()
-mon2 = monsters.Generator(2, "Water").new()
-mon3 = monsters.Generator(2, "Grass").new()
+def say(t = ""):
+    print(t)
+    time.sleep(0.5)
 
 def about(mon):
     n1 = ("name = " + mon.name())
     n2 = ("power = " + str(mon.power()))
     n3 = ("hp = " + str(mon.hp()))
     n4 = ("type = " + mon.type())
-    print(n1, "/", n2, "/", n3, "/", n4)
-    print()
-
-def main():
-    print()
-    print("1. PLAY")
-    print("2. HOW TO PLAY")
-    print("3. SETINGS")
-    print("4. HIGH SCORE")
-
-
+    say(n1 + " / " + n2 + " / " + n3 + " / " + n4)
+    say()
 
 def game():
-    while True:
-        deck = [mon1, mon2, mon3]
+    mon1 = monsters.Generator(2, "Fire").new()
+    mon2 = monsters.Generator(2, "Water").new()
+    mon3 = monsters.Generator(2, "Grass").new()
+    level = 0
+    deck = [mon1, mon2, mon3]
 
+    while True:
+        
         level += 1
-        print("----------------")
-        print()
+        say("----------------")
+        say()
         ii = 1
 
-        print("This is the deck you have:")
+        say("This is the deck you have:")
         for i in deck:
-            print("Monster-" + str(ii) + ":")
+            say("Monster-" + str(ii) + ":")
             about(i)
             ii += 1
-        print("")
+        say("")
 
         opponent = monsters.Generator(level).new()
-        print("About your opponent:")
+        say("About your opponent:")
         about(opponent)
 
         while True:
             try:
                 choice = int(input("Witch monster do you want to use? :"))
-                print()
+                say()
                 pmon = deck[choice-1]
                 break
             except:
-                print("Wrong Input\n")
+                say("Wrong Input\n")
 
         ph = pmon.hp()
         pa = monsters.Battle(pmon, opponent).attack()
@@ -62,34 +57,34 @@ def game():
         h = 0
         while True:
             h += 1
-            print("Round " + str(h))
-            print()
+            say("Round " + str(h))
+            say()
 
             r = random.randint(1, 20)
             if r == 1:
-                print("Player: SUPER-DUPER-DUPER ATTACK")
+                say("Player: SUPER-DUPER-DUPER ATTACK")
                 pa = pa + 4
             
             r = random.randint(1, 20)
             if r == 1:
-                print("Opponent: SUPER-DUPER-DUPER ATTACK")
+                say("Opponent: SUPER-DUPER-DUPER ATTACK")
                 oa = oa + 4
 
             ph = ph - oa
             oh = oh - pa
 
-            print("Player attak:", pa, "/ Player hp:", ph)
-            print("Opponernt attak:", oa, "/ Opponent hp:", oh)
-            print()
+            say(f"Player attak: {pa} / Player hp: {ph}")
+            say(f"Opponernt attak: {oa} / Opponent hp: {oh}")
+            say()
 
             if ph < 0:
                 win = False
-                print(pmon.name(), "faild")
+                say(pmon.name() + " faild")
                 break
 
             if oh < 0:
                 win = True
-                print(opponent.name(), "faild")
+                say(opponent.name() + " faild")
                 break
                 
             if oh < 0:
@@ -101,33 +96,41 @@ def game():
                         win = True
                     break
 
-            print()
+            say()
             input("Press ENTER ")
-            print("------------")
-            print()
+            say("------------")
+            say()
 
-        print("Score:", level)
+        say("Score: " + level)
         if win == True:
-            print("You won!")
+            say("You won!")
+            input("Press ENTER ")
+            say()
 
         if win == False:
-            print("The opponent won!")
-            break
-        print()
-        input("Press ENTER ")
+            say("The opponent won!")
+            input("Press ENTER ")
+            say()
+            say(f"Your monster {pmon.name()} is now ded!")
+            deck.remove(deck[choice-1])
+            if len(deck) == 0:
+                say("All your monsters has ben defeted!")
+                say()
+                break
+        
         ii = 1
         
-        print("This is the deck you have:")
+        say("This is the deck you have:")
         for i in deck:
-            print("Monster-" + str(ii) + ":")
+            say("Monster-" + str(ii) + ":")
             about(i)
             ii += 1
-        print("")
+        say("")
 
         while True:
             try:
                 choice1 = int(input("Witch monster do you want to upgrade? :"))
-                print()
+                say()
                 pmon = deck[choice1-1]
                 r = random.randint(0,1)
 
@@ -153,10 +156,23 @@ def game():
 
                 break
             except:
-                print("Wrong Input\n")
-        print()
+                say("Wrong Input\n")
+        say()
 
+def main():
+    while True:
+        say("----------")
+        say("1. PLAY")
+        say("2. SETINGS")
+        say("3. HARD MODE")
+        say("----------")
+        say()
 
-    
+        x = input(":")
+        say()
 
-    
+        if x == "1":
+            game()
+        
+
+main()
