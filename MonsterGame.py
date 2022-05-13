@@ -2,8 +2,9 @@ import monsters
 import random
 import time
 
-def say(t = ""):
-    print(t)
+#Print+
+def say(a = "", b = "", c = "", d = ""):
+    print(a, b, c, d)
     time.sleep(0.5)
 
 def about(mon):
@@ -13,6 +14,7 @@ def about(mon):
     n4 = ("type = " + mon.type())
     say(n1 + " / " + n2 + " / " + n3 + " / " + n4)
     say()
+
 
 def game():
     mon1 = monsters.Generator(2, "Fire").new()
@@ -35,7 +37,7 @@ def game():
             ii += 1
         say("")
 
-        opponent = monsters.Generator(level).new()
+        opponent = monsters.Generator(level * 4).new()
         say("About your opponent:")
         about(opponent)
 
@@ -76,24 +78,17 @@ def game():
             say(f"Player attak: {pa} / Player hp: {ph}")
             say(f"Opponernt attak: {oa} / Opponent hp: {oh}")
             say()
-
-            if ph < 0:
-                win = False
-                say(pmon.name() + " faild")
-                break
-
-            if oh < 0:
-                win = True
-                say(opponent.name() + " faild")
-                break
                 
-            if oh < 0:
-                if ph < 0:
-                    
-                    if ph < oh:
-                        win = False
-                    if oh < ph:
-                        win = True
+            if oh or ph < 0:
+
+                if ph < oh:
+                    win = False
+                    say(pmon.name() + " faild")
+                    break
+
+                if oh < ph:
+                    win = True
+                    say(opponent.name() + " faild")
                     break
 
             say()
@@ -101,7 +96,7 @@ def game():
             say("------------")
             say()
 
-        say("Score: " + level)
+        say("Score: ", level)
         if win == True:
             say("You won!")
             input("Press ENTER ")
@@ -111,7 +106,8 @@ def game():
             say("The opponent won!")
             input("Press ENTER ")
             say()
-            say(f"Your monster {pmon.name()} is now ded!")
+            say("Your monster", pmon.name(), "is now ded!")
+            say()
             deck.remove(deck[choice-1])
             if len(deck) == 0:
                 say("All your monsters has ben defeted!")
@@ -119,45 +115,52 @@ def game():
                 break
         
         ii = 1
-        
-        say("This is the deck you have:")
-        for i in deck:
-            say("Monster-" + str(ii) + ":")
-            about(i)
-            ii += 1
-        say("")
 
-        while True:
-            try:
-                choice1 = int(input("Witch monster do you want to upgrade? :"))
-                say()
-                pmon = deck[choice1-1]
-                r = random.randint(0,1)
+        if win == True:
+            say("This is the deck you have:")
+            for i in deck:
+                say("Monster-" + str(ii) + ":")
+                about(i)
+                ii += 1
+            say("")
 
-                if r == 0:
-                    if choice1 == 1:
-                        mon1 = monsters.Upgrade(mon1).at()
+            while True:
+                try:
+                    choice1 = int(input("Witch monster do you want to upgrade? :"))
+                    say()
+                    pmon = deck[choice1-1]
+                    deck.remove(pmon)
+                    r = random.randint(0,1)
 
-                    if choice1 == 2:
-                        mon2 = monsters.Upgrade(mon2).at()
+                    if r == 0:
+                        if choice1 == 1:
+                            mon1 = monsters.Upgrade(pmon).at()
+                            deck.append(mon1)
 
-                    if choice1 == 3:
-                        mon3 = monsters.Upgrade(mon3).at()
-                
-                if r == 1:
-                    if choice1 == 1:
-                        mon1 = monsters.Upgrade(mon1).hp()
+                        if choice1 == 2:
+                            mon2 = monsters.Upgrade(pmon).at()
+                            deck.append(mon2)
 
-                    if choice1 == 2:
-                        mon2 = monsters.Upgrade(mon2).hp()
+                        if choice1 == 3:
+                            mon3 = monsters.Upgrade(pmon).at()
+                            deck.append(mon3)
+                    
+                    if r == 1:
+                        if choice1 == 1:
+                            mon1 = monsters.Upgrade(pmon).hp()
+                            deck.append(mon1)
 
-                    if choice1 == 3:
-                        mon3 = monsters.Upgrade(mon3).hp()
+                        if choice1 == 2:
+                            mon2 = monsters.Upgrade(pmon).hp()
+                            deck.append(mon2)
 
-                break
-            except:
-                say("Wrong Input\n")
-        say()
+                        if choice1 == 3:
+                            mon3 = monsters.Upgrade(pmon).hp()
+                            deck.append(mon3)
+
+                    break
+                except:
+                    say("Wrong Input\n")
 
 def main():
     while True:
