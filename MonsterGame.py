@@ -15,7 +15,6 @@ def about(mon):
     say(n1 + " / " + n2 + " / " + n3 + " / " + n4)
     say()
 
-
 def game():
     mon1 = monsters.Generator(2, "Fire").new()
     mon2 = monsters.Generator(2, "Water").new()
@@ -75,8 +74,8 @@ def game():
             ph = ph - oa
             oh = oh - pa
 
-            say(f"Player attak: {pa} / Player hp: {ph}")
-            say(f"Opponernt attak: {oa} / Opponent hp: {oh}")
+            say("Player attak:", pa, "/ Player hp:", ph)
+            say("Opponernt attak:", oa, "/ Opponent hp:", oh)
             say()
                 
             if oh or ph < 0:
@@ -99,7 +98,7 @@ def game():
         say("Score: ", level)
         if win == True:
             say("You won!")
-            input("Press ENTER ")
+            input("Press ENTER")
             say()
 
         if win == False:
@@ -112,6 +111,9 @@ def game():
             if len(deck) == 0:
                 say("All your monsters has ben defeted!")
                 say()
+                input("Enter your name:")
+                f = open("Score.txt", "a")
+                f.write("name " + str(level) + "\n")
                 break
         
         ii = 1
