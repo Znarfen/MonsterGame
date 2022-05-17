@@ -111,9 +111,11 @@ def game():
             if len(deck) == 0:
                 say("All your monsters has ben defeted!")
                 say()
-                input("Enter your name:")
-                f = open("Score.txt", "a")
-                f.write("name " + str(level) + "\n")
+
+                #name = input("Enter your name:")
+                #f = open("Score.txt", "a")
+                #f.write(name + "" + str(level) + "\n")
+                #say()
                 break
         
         ii = 1
