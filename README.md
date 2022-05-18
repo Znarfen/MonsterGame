@@ -1,20 +1,6 @@
-#Readme
+# Readme
 
 Pogramet är skrivet i pyhon3.9
-Pull requestsIssuesMarketplace
-Explore
- 
- 
-Znarfen/MonsterGamePublic
-Pin
- Unwatch 1 
-Fork 0
- Star 0
-Code
-Issues
-Pull requests
-Actions
-Projects1
 
 Pogramet är ett spel. I spelet har du monster som ska överleva så länge som möjligt.
 Man satt mot en mostondare som är genererad av datorn. Om alla ens monster är döda är spelet slut.
