@@ -1,3 +1,4 @@
+from re import A
 import monsters
 import random
 import time
@@ -20,11 +21,10 @@ def showdeck(deck):
     ii = 1
     for i in deck:
         say(str(ii) + ". " + "Monster-" + str(ii) + ":")
+        say(str(ii) + ". " + " Monster-" + str(ii) + ":")
         about(i)
         ii += 1
     say("")
-
-
 
 def game():
     mon1 = monsters.Generator(2, "Fire").new()
@@ -128,6 +128,15 @@ def game():
                 say()
                 input("Press ENTER ")
                 
+<<<<<<< HEAD
+=======
+                #Fill hantering FIXA
+
+                #name = input("Enter your name:")
+                #f = open("Score.txt", "a")
+                #f.write(name + "" + str(level) + "\n")
+                #say()
+>>>>>>> 138d518599ce5b7c1c6a18dec8d3eaf0c0c4bc30
                 break
 
         say()
