@@ -1,4 +1,4 @@
-import monsters
+import Monsters
 import random
 import time
 
@@ -21,7 +21,7 @@ def showdeck(deck):
     say("This is the deck you have:")
     ii = 1
     for i in deck:
-        say(str(ii) + ". " + " Monster-" + str(ii) + ":")
+        say(str(ii) + ". " + "Monster-" + str(ii) + ":")
         about(i)
         ii += 1
     say("")
@@ -100,9 +100,9 @@ def score(do = "r", sc = 0):
 def game():
 
     # Föbereder ens deck
-    mon1 = monsters.Generator(2, "Fire").new()
-    mon2 = monsters.Generator(2, "Water").new()
-    mon3 = monsters.Generator(2, "Grass").new()
+    mon1 = Monsters.Generator(2, "Fire").new()
+    mon2 = Monsters.Generator(2, "Water").new()
+    mon3 = Monsters.Generator(2, "Grass").new()
     level = 0
     deck = [mon1, mon2, mon3]
 
@@ -116,7 +116,7 @@ def game():
         showdeck(deck)
 
         # Skapar mostondare
-        opponent = monsters.Generator(level * level).new()
+        opponent = Monsters.Generator(level * level).new()
         say("About your opponent:")
         about(opponent)
 
@@ -137,8 +137,8 @@ def game():
 
         # Monster börjar sloss
         while True:
-            pa = monsters.Battle(pmon, opponent).attack()
-            oa = monsters.Battle(opponent, pmon).attack()
+            pa = Monsters.Battle(pmon, opponent).attack()
+            oa = Monsters.Battle(opponent, pmon).attack()
 
             # Utan bonus (monstrets typ)
             rpa = pmon.power()
@@ -241,28 +241,28 @@ def game():
 
                     if r == 0:
                         if choice1 == 1:
-                            mon1 = monsters.Upgrade(pmon).at()
+                            mon1 = Monsters.Upgrade(pmon).at()
                             deck.insert(0, mon1)
 
                         if choice1 == 2:
-                            mon2 = monsters.Upgrade(pmon).at()
+                            mon2 = Monsters.Upgrade(pmon).at()
                             deck.insert(1, mon2)
 
                         if choice1 == 3:
-                            mon3 = monsters.Upgrade(pmon).at()
+                            mon3 = Monsters.Upgrade(pmon).at()
                             deck.insert(2, mon3)
                     
                     if r == 1:
                         if choice1 == 1:
-                            mon1 = monsters.Upgrade(pmon).hp()
+                            mon1 = Monsters.Upgrade(pmon).hp()
                             deck.insert(0, mon1)
 
                         if choice1 == 2:
-                            mon2 = monsters.Upgrade(pmon).hp()
+                            mon2 = Monsters.Upgrade(pmon).hp()
                             deck.insert(1, mon2)
 
                         if choice1 == 3:
-                            mon3 = monsters.Upgrade(pmon).hp()
+                            mon3 = Monsters.Upgrade(pmon).hp()
                             deck.insert(2, mon3)
 
                     break
