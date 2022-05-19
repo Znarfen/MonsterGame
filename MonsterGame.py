@@ -239,6 +239,7 @@ def game():
                     deck.remove(pmon)
                     r = random.randint(0,1)
 
+                    # Vilket monster som ska uppgraderas
                     if r == 0:
                         if choice1 == 1:
                             mon1 = Monsters.Upgrade(pmon).at()
