@@ -196,6 +196,8 @@ def game():
         say()
         say("Score:", level)
         say()
+
+        # Om man vinner
         if win == True:
             say("You won!")
             input("Press ENTER ")
