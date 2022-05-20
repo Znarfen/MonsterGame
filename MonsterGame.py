@@ -21,7 +21,7 @@ def showdeck(deck):
     say("This is the deck you have:")
     ii = 1
     for i in deck:
-        say(str(ii) + ". " + "Monster-" + str(ii) + ":")
+        say(str(ii) + ". " + " Monster-" + str(ii) + ":")
         about(i)
         ii += 1
     say("")
@@ -158,8 +158,8 @@ def game():
                 ob = "+" + str(ob)
 
             # Vissar hur det går för man
-            pa2 = str(rpa) + " + (" + str(pb) + ")"
-            oa2 = str(roa) + " + (" + str(ob) + ")"
+            pa2 = str(rpa) + " (" + str(pb) + ")"
+            oa2 = str(roa) + " (" + str(ob) + ")"
 
             say("Before:")
             say("Player attak:", pa2, "/ Player hp:", ph)
@@ -214,7 +214,7 @@ def game():
 
             # Avslut på spelet
             if len(deck) == 0:
-                say("All your monsters has ben defeted!")
+                say("All your Monsters has ben defeted!")
                 say()
                 input("Press ENTER ")
                 say()
@@ -239,7 +239,6 @@ def game():
                     deck.remove(pmon)
                     r = random.randint(0,1)
 
-                    # Vilket monster som ska uppgraderas
                     if r == 0:
                         if choice1 == 1:
                             mon1 = Monsters.Upgrade(pmon).at()
