@@ -116,7 +116,7 @@ def game():
         showdeck(deck)
 
         # Skapar mostondare
-        opponent = Monsters.Generator(level * level).new()
+        opponent = Monsters.Generator(level * 2).new()
         say("About your opponent:")
         about(opponent)
 
@@ -239,6 +239,7 @@ def game():
                     deck.remove(pmon)
                     r = random.randint(0,1)
 
+                    # Uppgraderar power
                     if r == 0:
                         if choice1 == 1:
                             mon1 = Monsters.Upgrade(pmon).at()
@@ -252,6 +253,7 @@ def game():
                             mon3 = Monsters.Upgrade(pmon).at()
                             deck.insert(2, mon3)
                     
+                    # Uppgraderar hp
                     if r == 1:
                         if choice1 == 1:
                             mon1 = Monsters.Upgrade(pmon).hp()
@@ -277,7 +279,7 @@ def main():
     while True:
         score()
         say("1. PLAY")
-        say("2. Quit")
+        say("2. QUIT")
         say("----------")
         say()
 

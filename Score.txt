@@ -1,8 +1,7 @@
 5 test1
-12 Zach1
+14 Zach1
 7 eggis
 5 Berna
 5 Aluca
 6 Test2
-4 särpe
-6 12345
+5 IDK12
