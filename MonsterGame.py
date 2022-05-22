@@ -57,8 +57,8 @@ def score(do = "r", sc = 0):
         while True:
             name = str(input("Enter a five leter name: "))
             say()
-
             ex = False
+
             for yy in sinfo:
                 if yy[1] == name:
                     name = "abcdef"
@@ -269,18 +269,25 @@ def game():
                 except:
                     say("Wrong Input\n")
 
+def exitp():
+    quit()
+
 # Huvudmenyn
 def main():
     while True:
         score()
         say("1. PLAY")
+        say("2. Quit")
         say("----------")
         say()
 
+        # Väljer vad man vill göra
         x = input(":")
         say()
 
         if x == "1":
             game()
+        if x == "2":
+            exitp()
         
 main()

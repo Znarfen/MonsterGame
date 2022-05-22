@@ -22,7 +22,6 @@ class NoType():
         return(self.monstertype)
 
 # Monster med typ
-
 class Fire(NoType):
     def __init__(self, at = 0, health = 0,
     monstername = "", monstertype = "Fire"):
@@ -111,7 +110,7 @@ class Generator():
         "No", "Red", "Blue", "Yelow", "Grean", "Demo", "Null", "Gass", 
         "One", "PeePee", "UwU", "No", "Mon", "OwO", "Lul", "Fast", "Bot"]
 
-        # Bässtemer ett annat namn
+        # Bässtemer ett till namn
         try:
             # API
             api = "https://random-word-api.herokuapp.com/word"
